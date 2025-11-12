@@ -31,23 +31,23 @@ cp "$SQUID_CONF" "$BACKUP_CONF"
 optimize_squid_conf() {
     echo ">>> Optimizing squid.conf..." >> "$LOG_FILE"
 
-    # ลบ 4 บรรทัดนี้จาก squid.conf
+    # Remove old ACL & http_access
     sed -i '/^acl any_host src all/d' "$SQUID_CONF"
     sed -i '/^acl all_dst dst all/d' "$SQUID_CONF"
     sed -i '/^http_access allow any_host/d' "$SQUID_CONF"
     sed -i '/^http_access allow all_dst/d' "$SQUID_CONF"
 
-    # ตั้งค่าหน่วยความจำ
+    # Set memory and object size
     sed -i '/^cache_mem /d' "$SQUID_CONF"
     echo "cache_mem 32 MB" >> "$SQUID_CONF"
 
     sed -i '/^maximum_object_size /d' "$SQUID_CONF"
     echo "maximum_object_size 10 MB" >> "$SQUID_CONF"
 
-    # แก้ cache_dir
+    # Fix cache_dir
     sed -i "s|^cache_dir .*$|cache_dir ufs $CACHE_DIR 100 16 256|" "$SQUID_CONF"
 
-    # แก้ coredump_dir ให้ตรงกับ /var/spool/squid
+    # Fix coredump_dir
     sed -i "s|^coredump_dir .*$|coredump_dir $CACHE_DIR|" "$SQUID_CONF"
 
     echo ">>> squid.conf optimized successfully." >> "$LOG_FILE"
@@ -114,7 +114,7 @@ check_squid() {
         echo ">>> Squid not running, starting..." >> "$LOG_FILE"
         $SQUID_PATH -NCd1
     else
-        echo ">>> Squid is already running!  Process ID $SQUID_PID" >> "$LOG_FILE"
+        echo ">>> Squid is already running! Process ID $SQUID_PID" >> "$LOG_FILE"
     fi
 }
 
