@@ -1,0 +1,1 @@
+# squid_autofix_optimize
