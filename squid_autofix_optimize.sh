@@ -44,8 +44,12 @@ optimize_squid_conf() {
     sed -i '/^maximum_object_size /d' "$SQUID_CONF"
     echo "maximum_object_size 10 MB" >> "$SQUID_CONF"
 
-    # Fix cache_dir
-    sed -i "s|^cache_dir .*$|cache_dir ufs $CACHE_DIR 100 16 256|" "$SQUID_CONF"
+    # Fix cache_dir (แก้หรือเพิ่มถ้าไม่มี)
+    if grep -q "^cache_dir" "$SQUID_CONF"; then
+        sed -i "s|^cache_dir .*$|cache_dir ufs $CACHE_DIR 100 16 256|" "$SQUID_CONF"
+    else
+        echo "cache_dir ufs $CACHE_DIR 100 16 256" >> "$SQUID_CONF"
+    fi
 
     # Fix coredump_dir
     sed -i "s|^coredump_dir .*$|coredump_dir $CACHE_DIR|" "$SQUID_CONF"
