@@ -39,7 +39,7 @@
 wget https://raw.githubusercontent.com/TspKchn/squid_autofix_optimize/main/squid_autofix_optimize.sh -O /usr/local/bin/squid_autofix_optimize.sh
 chmod +x /usr/local/bin/squid_autofix_optimize.sh
 sudo /usr/local/bin/squid_autofix_optimize.sh
-tail -n 50 /var/log/squid_autofix.log
+tail -n 10 /var/log/squid_autofix.log
 
 ```
 
