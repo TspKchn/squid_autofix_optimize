@@ -33,23 +33,14 @@
 
 ## 💻 Usage
 
-1. ดาวน์โหลดสคริปต์:
+ดาวน์โหลดสคริปต์ & รันสคริปต์ด้วย root & ตรวจสอบ log
 
 ```bash
-wget https://your-repo-link/squid_autofix_optimize.sh -O /usr/local/bin/squid_autofix_optimize.sh
+wget https://raw.githubusercontent.com/TspKchn/squid_autofix_optimize/main/squid_autofix_optimize.sh -O /usr/local/bin/squid_autofix_optimize.sh
 chmod +x /usr/local/bin/squid_autofix_optimize.sh
-```
-
-2. รันสคริปต์ด้วย root:
-
-```bash
 sudo /usr/local/bin/squid_autofix_optimize.sh
-```
-
-3. ตรวจสอบ log:
-
-```bash
 tail -f /var/log/squid_autofix.log
+
 ```
 
 ---
